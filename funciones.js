@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     imgPosicion = [];
     imgElegida = [];
     let contador = 0;
-    let acierto = document.querySelector('.acierto');
+    let acierto = document.querySelector('.aciertos');
 
     const imagenes = [
         {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nombre: 'gowther'
         },
         {
-            url: '../img/merlin.png',
+            url: '../img/merlin.jpg',
             nombre: 'merlin'
         },
         {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nombre: 'gowther'
         },
         {
-            url: '../img/merlin.png',
+            url: '../img/merlin.jpg',
             nombre: 'merlin'
         }
     ];
