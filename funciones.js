@@ -1,74 +1,129 @@
-document.addEventListener("DOMContentLoaded",function(){
+document.addEventListener('DOMContentLoaded', () => {
 
+   
+    imgPosicion = [];
+    imgElegida = [];
+    let contador = 0;
+    let acierto = document.querySelector('.acierto');
 
-
-    // DECLARAR VARIABLES
-    let imagenes=[
+    const imagenes = [
         {
-            url:"imag/escanor.jpg",
-            nombre: "escanor"
+            url: '../img/bank.jpg',
+            nombre: 'bank'
         },
         {
-            url:"imag/Gowther.jpg",
-            nombre: "escGowtherr"
+            url: '../img/diana.jpg',
+            nombre: 'diana'
         },
         {
-            url:"imag/merlin.jpg",
-            nombre: "merlin"
+            url: '../img/escanor.jpg',
+            nombre: 'escanor'
         },
         {
-            url:"imag/meliodas.jpg",
-            nombre: "meliodas"
+            url: '../img/king.jpg',
+            nombre: 'king'
         },
         {
-            url:"imag/escanor.jpg",
-            nombre: "escanor"
+            url: '../img/gowther.jpg',
+            nombre: 'gowther'
         },
         {
-            url:"imag/escanor.jpg",
-            nombre: "escanor"
+            url: '../img/merlin.png',
+            nombre: 'merlin'
         },
         {
-            url:"imag/escanor.jpg",
-            nombre: "escanor"
+            url: '../img/bank.jpg',
+            nombre: 'bank'
         },
         {
-            url:"imag/Gowther.jpg",
-            nombre: "escGowtherr"
+            url: '../img/diana.jpg',
+            nombre: 'diana'
         },
         {
-            url:"imag/merlin.jpg",
-            nombre: "merlin"
+            url: '../img/escanor.jpg',
+            nombre: 'escanor'
         },
         {
-            url:"imag/meliodas.jpg",
-            nombre: "meliodas"
+            url: '../img/king.jpg',
+            nombre: 'king'
         },
         {
-            url:"imag/escanor.jpg",
-            nombre: "escanor"
+            url: '../img/gowther.jpg',
+            nombre: 'gowther'
         },
         {
-            url:"imag/escanor.jpg",
-            nombre: "escanor"
+            url: '../img/merlin.png',
+            nombre: 'merlin'
         }
-    ]
+    ];
 
-    let tablero=document.querySelector(".tablero");
+    imagenes.sort(() => Math.random() - 0.5);
 
-// funcion para agregar las imagenes 
+    const tablero = document.querySelector('.tablero');
 
-function agregarimagenes(){
+    const agregarImg = () => {
+        for (let i = 0; i < imagenes.length; i++) {
+            const img = document.createElement('img');
+            // img.append(imagenes[i]);
+            img.setAttribute('src', '../img/pregunta.jpg');
+            // img.setAttribute('alt', imagenes[i].nombre);
+            img.setAttribute('data-id', i);
 
-    for (let index = 0; index < imagenes.length; index++) {
-       let img=document.createElement("img"); 
-       img.setAttribute("src","imag/descarga (3).jpg")
-       img.setAttribute("width","200px");
-       tablero.appendChild(img);
-        
+            img.addEventListener('click', mostrarImg);
+            tablero.appendChild(img);
+        }
+    }
+
+    agregarImg();
+
+    function mostrarImg() {
+        let posicionImg = this.getAttribute('data-id');
+        this.setAttribute('src', imagenes[posicionImg].url);
+
+        const img = document.querySelectorAll('img')[posicionImg];
+        img.setAttribute('class', 'not-active');
+
+        imgElegida.push(imagenes[posicionImg].nombre);
+        imgPosicion.push(posicionImg);
+    
+        if(imgElegida.length == 2) {
+            setTimeout(compararImg, 300)
+        }
         
     }
-}
-agregarimagenes();
-})
 
+    function compararImg() {
+
+        const todasImg = document.querySelectorAll('.tablero img');
+        const opt1 = imgPosicion[0];
+        const opt2 = imgPosicion[1];
+
+        if (imgElegida[0] === imgElegida[1]) {
+            todasImg[opt1].setAttribute('src', '../img/chulo.png');
+            todasImg[opt2].setAttribute('src', '../img/chulo.png');
+            contador++;
+            acierto.textContent = contador;
+            alert('La imagenes son iguales');
+            if(contador == 6) {
+                const seguir = confirm("Deseas intentarlo nuevamente");
+                if(seguir){
+                    location.reload();
+                }
+            }
+            
+        } else {
+            todasImg[opt1].setAttribute('src', '../img/pregunta.jpg');
+            todasImg[opt2].setAttribute('src', '../img/pregunta.jpg');
+            todasImg[opt1].classList.remove('not-active');
+            todasImg[opt2].classList.remove('not-active');
+            alert('Las imagenes no coinciden :(')
+        }
+
+        
+
+        imgElegida = [];
+        imgPosicion = [];
+    }
+
+
+});
