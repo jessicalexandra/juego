@@ -105,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
             acierto.textContent = contador;
             alert('La imagenes son iguales');
             if(contador == 6) {
-                const seguir = confirm("Deseas intentarlo nuevamente");
-                if(seguir){
+                const seguir = prompt("Deseas intentarlo nuevamente (s/n)");
+                if(seguir=="s"){
                     location.reload();
                 }
             }

@@ -27,3 +27,7 @@ img {
 .acierto {
     text-align: center;
 }
+.not-active { 
+    pointer-events: none; 
+    cursor: default; 
+}
